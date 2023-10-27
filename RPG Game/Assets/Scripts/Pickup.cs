@@ -5,10 +5,9 @@ using Photon.Pun;
 
 public enum PickupType
 {
-    Gold,
-    Health,
-    Chest,
-    Gem
+    Treasure,
+    Health
+    
 }
 
 public class Pickup : MonoBehaviourPun
@@ -25,16 +24,10 @@ public class Pickup : MonoBehaviourPun
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
-            if(type == PickupType.Gold)
-                player.photonView.RPC("GiveGold", player.photonPlayer, value);
+            if(type == PickupType.Treasure)
+                player.photonView.RPC("GiveTreasure", player.photonPlayer, value);
             else if(type == PickupType.Health)
-                player.photonView.RPC("Heal", player.photonPlayer, value);
-            else if(type == PickupType.Chest)
-                player.photonView.RPC("GiveChest", player.photonPlayer, value);
-            else if(type == PickupType.Gem)
-                player.photonView.RPC("GiveGem", player.photonPlayer, value);
-
-                
+                player.photonView.RPC("Heal", player.photonPlayer, value);                
 
             PhotonNetwork.Destroy(gameObject);
         }
