@@ -90,6 +90,11 @@ public class PlayerController : MonoBehaviourPun
             Enemy enemy = hit.collider.GetComponent<Enemy>();
             enemy.photonView.RPC("TakeDamage", RpcTarget.MasterClient, damage);
         }
+        // else if (hit.collider != null && hit.collider.gameObject.CompareTag("Gate"))
+        // {
+        //     Gate gate = hit.collider.GetComponent<Gate>();
+        //     gate.photonView.RPC("TakeDamage", RpcTarget.MasterClient, damage);
+        // }
         weaponAnim.SetTrigger("Attack");
     }
 
