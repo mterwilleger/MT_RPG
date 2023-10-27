@@ -8,8 +8,9 @@ public class WinConditions : MonoBehaviourPun
 {
     void OnTriggerEnter2D (Collider2D collision)
     {
+       // Debug.Log("TRIGGER");
         if(!PhotonNetwork.IsMasterClient)
-            return;
+             return;
 
         PhotonNetwork.Destroy(gameObject);
     }

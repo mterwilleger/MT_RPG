@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviourPun
     public float respawnTime;
 
     private int playersInGame;
+    public GameObject FinishLine;
 
     //instance
     public static GameManager instance;
@@ -26,6 +27,13 @@ public class GameManager : MonoBehaviourPun
     {
         players = new PlayerController[PhotonNetwork.PlayerList.Length];
         photonView.RPC("ImInGame", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    void Update ()
+    {
+        if(FinishLine == null)
+            photonView.RPC("WinGame", RpcTarget.All, players.First(x => !x.dead).id);
     }
 
     [PunRPC]
@@ -44,4 +52,23 @@ public class GameManager : MonoBehaviourPun
         //Initialize Player
         playerObj.GetComponent<PhotonView>().RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
     }
+
+    public PlayerController GetPlayer (int playerId)
+    {
+        return players.First(x => x.id == playerId);
+    }
+
+    [PunRPC]
+    public void WinGame (int winningPlayer)
+    {
+        //set UI Win Text
+        GameUI.instance.SetWinText(GetPlayer(winningPlayer).photonPlayer.NickName);
+
+        NetworkManager.instance.ChangeScene("Menu");
+    }
+
+    // void GoBackToMenu ()
+    // {
+        
+    // }
 }
