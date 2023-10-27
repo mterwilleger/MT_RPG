@@ -7,6 +7,8 @@ using TMPro;
 public class GameUI : MonoBehaviour
 {
     public TextMeshProUGUI goldText;
+    public TextMeshProUGUI chestText;
+    public TextMeshProUGUI gemText;
 
     //instance
     public static GameUI instance;
@@ -20,4 +22,15 @@ public class GameUI : MonoBehaviour
     {
         goldText.text = "<b>Gold:</b> " + gold;
     }
+
+    public void UpdateChestText (int chest)
+    {
+        chestText.text = "<b>Chest:</b> " + chest;
+    }
+
+    public void UpdateGemText (int gem)
+    {
+        gemText.text = "<b>Gems:</b> " + gem;
+    }
+
 }

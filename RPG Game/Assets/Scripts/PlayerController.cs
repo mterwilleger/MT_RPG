@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviourPun
     [Header("Info")]
     public float moveSpeed;
     public int gold;
+    public int chest;
+    public int gem;
     public int curHp;
     public int maxHp;
     public bool dead;
@@ -167,6 +169,24 @@ public class PlayerController : MonoBehaviourPun
 
         // update the ui
         GameUI.instance.UpdateGoldText(gold);
+    }
+
+    [PunRPC]
+    void GiveGem (int gemToGive)
+    {
+        gem += gemToGive;
+
+        // update the ui
+        GameUI.instance.UpdateGoldText(gem);
+    }
+
+    [PunRPC]
+    void GiveChest (int chestToGive)
+    {
+        chest += chestToGive;
+
+        // update the ui
+        GameUI.instance.UpdateGoldText(chest);
     }
 
 }

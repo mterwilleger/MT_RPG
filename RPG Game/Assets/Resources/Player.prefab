@@ -175,6 +175,8 @@ MonoBehaviour:
   id: 0
   moveSpeed: 3
   gold: 0
+  chest: 0
+  gem: 0
   curHp: 100
   maxHp: 100
   dead: 0
